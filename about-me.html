@@ -148,8 +148,30 @@
 </nav>
      <main>
     <div class="sidebar">
-        <img src=https://thumbs.dreamstime.com/t/assorted-sports-equipment-black-11683562.jpg>
-        <img src=https://c8.alamy.com/comp/P2KEBB/coding-word-cloud-concept-on-black-background-P2KEBB.jpg>
+      <img name="slide" width="400" height="200" />  
+        <script>
+        var i = 0;
+        var images = [];
+        var time = 3000;
+    
+        images[0] = "https://thumbs.dreamstime.com/t/assorted-sports-equipment-black-11683562.jpg";
+        images[1] = "https://c8.alamy.com/comp/P2KEBB/coding-word-cloud-concept-on-black-background-P2KEBB.jpg";
+    
+    function changeImg(){
+        document.slide.src = images[i];
+        
+        if (i < images.length - 1) {
+            i++;
+        }
+        else {
+            i = 0;
+        }
+        setTimeout("changeImg()", time);
+    }
+    
+    window.onload=changeImg;
+    
+     </script>   
     </div>
     <div class="contents">
     <header>My bio</header>
