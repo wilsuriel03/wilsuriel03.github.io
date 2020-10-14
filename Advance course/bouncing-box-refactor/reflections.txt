@@ -1,0 +1,5 @@
+the jQuery file is being loaded into this project by Content Delivery Network (CDN).
+Incorrect file path
+
+I think is more beneficial to have them in different files because it is more easier to find what you are looking for. Also it makes your code look more neat and professional. One cons is that if you are writing a larger code it will make it difficult for you to store it in the file.
+By refactoring your JS code and separating it from a function you wont repeat your self. A con is that you will have to call every new function you had made.

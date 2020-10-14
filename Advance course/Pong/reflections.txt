@@ -1,0 +1,51 @@
+*DESCRIPTIONS:
+
+Pong is a game played by two players who each control a paddle - 
+placed at opposite sides of the screen. 
+A ball is hit back and forth between the two paddles,- 
+and the top and bottom walls, until the ball goes past one player's paddle. 
+The player who misses the ball loses the point. The game ends when one player reaches 11 points.
+
+*USER STORY / GAMEPLAY
+
+When the game begins the ball will be positioned in the center. Then the game will start and the ball will hit back and forth between the two paddles, and the top and bottom walls.
+The game ends when one player reaches 11 points.
+There will be an 'if' when a key is pressed, an 'if' when the ball collides, an 'if' for the position of each side of the players.
+
+*VISUAL GAME COMPONENTS:
+
+The visual game components are the board which is the map or screen where the game going to be inside - 
+and gameitem which is (the left paddle, the ball, and the right paddle).
+The board is going to be static. 
+       ^^^
+/* APPEREANCE */
+ a background-color of  black;
+ a width of 100px and a height of 100px;
+ 
+ /* POSITIONING */
+ a position of absolute so its position stays the same on any screen;
+
+gameItems are going to be animated with functions.
+for example:
+function handleKeyDown() {
+  var keycode = event.which;
+  console.log(keycode);
+  
+  if (keycode === KEYCODE.ENTER) {
+    console.log("enter pressed");
+  }
+
+We will need data to manage the game positions left or right (positionX and positionY), for speed up or down (speedX and speedY), and score to count points .
+
+*EVENTS / LOGIC
+
+ The events that will occur in this game are keyboard events for when a key is being pressed "key up" and "key down" and onClick event - 
+ for when the game ends you restart the game by clicking a button  that will say  "play again".
+
+ If arrow key up is pressed move right paddle up for player one, If arrow key down is pressed move right paddle down for player one. 
+ If arrow key up is released stop right paddle for player one, If arrow key down is released stop right paddle for player one.
+ If W key is pressed move left paddle up for player two, If S key is pressed move left paddle down for player two.
+ If W key is released stop left paddle for player two, If S key is released stop left paddle for player two.
+ If right or left paddle hit the the top or bottom border stop paddles from going out the the board.
+ If the ball hit the top or bottom wall it will bounce back. If ball hits one of the paddles it will go to the opposite side. 
+ If one player misses the ball he lose the point and the other player gain one. If one player gets to 11 points that player wins and the game ends.
