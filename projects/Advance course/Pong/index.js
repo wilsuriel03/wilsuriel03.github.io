@@ -9,19 +9,19 @@ function runProgram(){
 
   // Constant Variables
   var FRAMES_PER_SECOND_INTERVAL = 1000 / 60;
-  var KEY1 = {
+  const KEY1 = {
      "Up": 38,
      "Down": 40,
-  }
-  var KEY2 = {
+  };
+  const KEY2 = {
       "Up": 87,
       "Down": 83,
-  }
+  };
   // Game Item Objects
 var BOARD_WIDTH = $('#board').width();
 var BOARD_HEIGHT = $('#board').height();
-var x = 100;
-var y = 100;
+var x = 0;
+var y = 0;
 var speedX = 0;
 var speedY = 0;
 var Score = 0;
@@ -60,49 +60,46 @@ playerTwo.score = 0;
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
-  function newFrame() {
-    
+ function newFrame() {
+  repositionGameItem();
 
   }
   
   /* 
   Called in response to events.
   */
-  function handleDownEvent(event) {
-if (event.which === KEY1.Up) {
-      rightPaddle.speedY = 10;
-      
-    }
+ function handleDownEvent(event) {
+  if (event.which === KEY1.Up) {
+       obj.speedY += 10;
+  }
   else if (event.which === KEY1.Down) {
-       rightPaddle.speedY -= 10;
-       
-    }
+       obj.speedY -= 10;
+  }  
+    
   else if (event.which === KEY2.Up) {
-       leftPaddle.speedY += 10;
-     
-    }
+       obj.speedY += 10;
+  } 
+    
   else if (event.which === KEY2.Down) {
-       leftPaddle.speedY -= 10;
-      
-    }
+       obj.speedY -= 10;
+  }  
 }
 function handleUpEvent(event) {
- if (event.which === KEY1.Up) {
-      rightPaddle.speedY = 0;
-     
-    }
+  if (event.which === KEY1.Up) {
+      obj.speedY = 0;
+  }
+  
   else if (event.which === KEY1.Down) {
-      rightPaddle.speedY= 0;
-     
-    }
+      obj.speedY = 0;
+  }
+  
   else if (event.which === KEY2.Up) {
-      leftPaddle.speedY = 0;
-      
-    }
+      obj.speedY = 0;
+  }
+  
   else if (event.which === KEY2.Down) {
-     leftPaddle.speedY = 0;
-      
-   }
+     obj.speedY = 0;
+  }
 }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -136,6 +133,15 @@ function handleUpEvent(event) {
 
 } */
 
+/*function collision () {
+
+}*/
+
+function repositionGameItem() {
+    obj.x += obj.speedX;
+    obj.y += obj.speedY;
+}
+
 function increasePoints ()  {
     // increase points
     score += 1;
@@ -143,5 +149,6 @@ function increasePoints ()  {
     $(score).css("color", "white");
     $(score).css("font-family", "Roboto", "sans-serif");
     $(score).css("font-size", "48px");
+    $(score).css("opacity", ".75");
 } 
 
