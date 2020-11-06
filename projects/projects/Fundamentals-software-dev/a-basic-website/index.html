@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> Wilber's Website!</title>
+</head>
+    <style>
+     img {
+        border: 3px solid black;
+        border-radius: 10px;
+    }
+     body {
+        background-image:url(https://ak.picdn.net/shutterstock/videos/30783463/thumb/1.jpg);
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        font-family: courier;
+        background-repeat:no-repeat;
+        background-size:cover ;
+    }
+    header {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    #all-contents {
+        max-width: 800px;
+        margin: auto;
+    }
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    /* navigation menu */
+    .dropbtn {
+        background-color: rgb(35, 62, 94);
+        color: white;
+        padding: 7px;
+        font-size: 7px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+       position: relative;
+       display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: rgb(90, 95, 99);}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      background-color: rgb(35, 62, 94);
+    }
+    nav {
+        background: dodgeblue;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        display: flex;
+        padding: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+    
+    nav header {
+        display: flex;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        flex: 1;
+    }
+    
+    nav ul {
+        list-style-image: none;
+    }
+    nav li {
+        display: inline-block;
+        padding: 0 10px;
+    }
+    nav a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    /* main container area beneath menu */
+    main {
+        background: rgb(255, 255, 255);
+        display: flex;
+        border: 2px  white;
+        border-radius: 10px;
+    }
+    .sidebar {
+        margin-right: 25px;
+        padding: 10px;
+    }
+    .sidebar img {
+        width: 220px;
+    }
+    .content {
+        flex: 1;
+        padding: 15px;
+    }
+    .interests header {
+        font-size: 1.25em;
+    }
+</style>
+<body>
+    <div id="all-contents">
+        <nav>
+            <header>Wilber's Web</header>
+            <div class="dropdown">
+            <button class="dropbtn"><p><i class="arrow down"></i></p></button>
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="about-me.html">About-me</a>
+        </div>
+    </div>
+</nav>
+
+     <main>
+        <div class="sidebar">
+            <img src=https://www.em360tech.com/wp-content/uploads/2018/11/AdobeStock_206101585.jpeg>
+        </div>
+           
+    <div class="contents">
+        <header>Wilber</header>
+        <p> Future Cyber Engeneering!</p>
+        <section class="interests">
+    <header>Interests</header>
+    <ul>
+        <li>Coding</li>
+        <li>Sports</li>
+        <li>Learning</li>
+    </ul>
+</section>
+            
+            </div>
+         </main>
+    </div>
+</body>
+
+</html>

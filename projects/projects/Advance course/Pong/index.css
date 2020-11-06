@@ -1,0 +1,146 @@
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: black;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+ background: black;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+/*button {
+  background-color: white;
+  border: 0;
+  border-radius: 200px;
+  padding: 16px 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 16px;
+  min-width: 160px;
+  outline: none;
+  transition: .25s;
+  opacity: .75;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 1;
+}*/
+
+.ln {
+  border-left: 2px solid white;
+  height: 550px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+  opacity: .35;
+} 
+
+ /*#startMenu {
+  position: fixed;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s;
+  filter: blur(20px);
+  }
+
+ #startMenu h1 {
+  color: white;
+  text-transform: uppercase;
+  font-size: 48px;
+  margin-top: 0;
+  top: 50%;
+  text-align: center;
+}
+*/
+
+/*uncomment if you prefer full screen*/
+/*#board {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}*/
+
+/*uncomment if you prefer a margin*/
+#board {
+  width: 1000px;
+  height: 550px;
+  border: 1px solid white;    
+  background-color: black;
+  position: relative;
+}
+
+#playerOne {
+color: white;
+opacity: .75;
+font-family: 'Roboto', sans-serif ;
+font-size: 48px;
+top: 251;
+left: 100px;
+}
+
+#playerTwo {
+color: white;
+opacity: .75;
+font-family: 'Roboto', sans-serif ;
+font-size: 48px;
+top: 251;
+right: 100px;
+}
+
+#ball {
+  background-color: white;
+  width: 15px;
+  height: 15px;
+  border-radius: 100px;
+  position: absolute;
+  top: 251px;
+  left: 490px;
+}
+
+#leftPaddle {
+  background-color: white;
+  width: 10px;
+  height: 85px;
+  position: absolute;
+  left: 10px;
+  bottom: 251px;
+}
+
+#rightPaddle {
+  background-color: white;
+  width: 10px;
+  height: 85px;
+  position: absolute;
+  right: 10px;
+  bottom: 251px;
+}
+
+#gameOver {
+color: black;
+width: 100%;
+height: 100%;
+position: absolute;
+}
+
+#gameMessage{
+color: white;
+font-family: Arial Narrow, sans-serif;
+text-transform: uppercase;
+text-align: center;
+margin:400px auto;
+opacity: .75;
+}
+
+
