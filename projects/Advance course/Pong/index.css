@@ -14,7 +14,7 @@ body {
  justify-content: center;
 }
 
-button {
+/*button {
   background-color: white;
   border: 0;
   border-radius: 200px;
@@ -32,31 +32,71 @@ button {
 
 button:hover {
   opacity: 1;
-}
-
-h1 {
-  color: white;
-  text-transform: uppercase;
-  font-size: 48px;
-  margin-top: 0;
-}
+}*/
 
 .ln {
-  border-left: 3px solid white;
-  height: 540px;
+  border-left: 2px solid white;
+  height: 550px;
   position: absolute;
   left: 50%;
   margin-left: -3px;
   top: 0;
-  opacity: .50;
-}  
+  opacity: .35;
+} 
 
+ /*#startMenu {
+  position: fixed;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s;
+  filter: blur(20px);
+  }
+
+ #startMenu h1 {
+  color: white;
+  text-transform: uppercase;
+  font-size: 48px;
+  margin-top: 0;
+  top: 50%;
+  text-align: center;
+}
+*/
+
+/*uncomment if you prefer full screen*/
+/*#board {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}*/
+
+/*uncomment if you prefer a margin*/
 #board {
-  width: 540px;
-  height: 540px;
-  border: 1px solid white;
+  width: 1000px;
+  height: 550px;
+  border: 1px solid white;    
   background-color: black;
   position: relative;
+}
+
+#playerOne {
+color: white;
+opacity: .75;
+font-family: 'Roboto', sans-serif ;
+font-size: 48px;
+top: 251;
+left: 100px;
+}
+
+#playerTwo {
+color: white;
+opacity: .75;
+font-family: 'Roboto', sans-serif ;
+font-size: 48px;
+top: 251;
+right: 100px;
 }
 
 #ball {
@@ -65,8 +105,8 @@ h1 {
   height: 15px;
   border-radius: 100px;
   position: absolute;
-  top: 50%;
-  left: 261px;
+  top: 251px;
+  left: 490px;
 }
 
 #leftPaddle {
@@ -74,8 +114,8 @@ h1 {
   width: 10px;
   height: 85px;
   position: absolute;
-  left: 5%;
-  bottom: 45%;
+  left: 10px;
+  bottom: 251px;
 }
 
 #rightPaddle {
@@ -83,6 +123,24 @@ h1 {
   width: 10px;
   height: 85px;
   position: absolute;
-  right: 5%;
-  bottom: 45%;
+  right: 10px;
+  bottom: 251px;
 }
+
+#gameOver {
+color: black;
+width: 100%;
+height: 100%;
+position: absolute;
+}
+
+#gameMessage{
+color: white;
+font-family: Arial Narrow, sans-serif;
+text-transform: uppercase;
+text-align: center;
+margin:400px auto;
+opacity: .75;
+}
+
+

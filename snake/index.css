@@ -1,0 +1,46 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: black;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+#board {
+  width: 1000px;
+  height: 550px;
+  border: 1px solid black;    
+  background-color: white; 
+  position: relative;
+}
+
+#title {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+
+#score{
+    font-size: 30px;
+    width: 165px;
+    text-align: center;
+    margin: 10px auto;
+    border: 1px dashed green;
+    padding: 10px;
+    display: none;
+}
+
+#snakeHead {
+  background-color: green;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 50%;   
+  top: 50%;   
+}
