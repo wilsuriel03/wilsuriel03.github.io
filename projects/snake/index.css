@@ -26,14 +26,20 @@ body {
     color: white;
 }
 
-#score{
+#score {
     font-size: 30px;
     width: 165px;
     text-align: center;
     margin: 10px auto;
-    border: 1px dashed green;
-    padding: 10px;
-    display: none;
+    padding: 20px;
+    color: white;
+    
+}
+
+#apple{
+  background-color: red;
+  width: 20px;
+  height: 20px;
 }
 
 #snakeHead {

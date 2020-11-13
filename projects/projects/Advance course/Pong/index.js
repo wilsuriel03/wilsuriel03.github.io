@@ -1,7 +1,19 @@
 /* global $, sessionStorage */
 
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
-  
+/*function startMenu () {
+    var strt = document.getElementById("startBtn");
+   
+    strt.addEventListener("click",runProgram); // when start botton is clicked start the game
+    hideStartMenu();
+}
+
+function hideStartMenu() {
+    $("#startMenu").css('visibility', 'hidden');
+}
+*/
+
+
 function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
@@ -9,6 +21,9 @@ function runProgram(){
 
   // Constant Variables
   var FRAMES_PER_SECOND_INTERVAL = 1000 / 60;
+  var boardWidth = $("#board").width();
+  var boardHeight = $("#board").height();
+ 
     //Inputs
    const KEY2 = {
      "Up": 38,
@@ -19,10 +34,12 @@ function runProgram(){
       "Down": 83,
   };
   //Other vars
-  var speedUp = 1.5;
+  var speedUp = 1.2;
   var playerOne = 0;
   var playerTwo = 0;
   var scoreToWin = 11;
+  var gameOverMenu;
+  var again;
 
   
   // Game Item Objects
@@ -46,6 +63,8 @@ function runProgram(){
   $(document).on('keydown', handleKeyDown)
   $(document).on('keyup', handleKeyUp)                           // change 'eventType' to the type of event you want to handle
 
+  ballObj.speedX = 3;
+  ballObj.speedY = 2;
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -158,7 +177,7 @@ function handleKeyUp(event) {
         ballObj.speedY = ballObj.speedY * speedUp;
         ballObj.speedX = ballObj.speedX * speedUp;
         ballObj.speedX = -ballObj.speedX;
-       // ballObj.speedY = -ballObj.speedY;
+       //ballObj.speedY = -ballObj.speedY;
         
         
     }
@@ -166,7 +185,7 @@ function handleKeyUp(event) {
 
 function bounce(ball)
  {
-    if(ball.y < 1 || ball.y > 535)
+    if(ball.y < 1 || ball.y > boardHeight)
     {
         ballObj.speedY = -ballObj.speedY;
     }
@@ -189,7 +208,7 @@ function bounce(ball)
  {
     leftPaddleObj.x = 10;
     leftPaddleObj.y = 251;
-    rightPaddleObj.x = 10;
+    rightPaddleObj.x = 980;
     rightPaddleObj.y = 251;
     ballObj.speedX = -1;
     ballObj.speedY = -1;
@@ -200,7 +219,7 @@ function bounce(ball)
  //increase points
  function increasePoints(obj)
  {
-    if(obj.x > 460)
+    if(obj.x > boardWidth)
     {
         playerOne ++;
         reposition();
@@ -211,24 +230,41 @@ function bounce(ball)
         reposition();
     }
  }
+function againBtn (){
+again = document.getElementById('againBtn');
+again.addEventListener('click', playAgain);
+}
 
+function playAgain (){
+    runProgram();
+    reposition();
+    hideGameOver();
+}
  
+function displayGameOver() {
+     gameOverMenu = document.getElementById('gameOver');
+     $("#gameOver").css('visibility', 'visible');
+     againBtn();
+ }
+ function hideGameOver(){
+     $("#gameOver").css('visibility', 'hidden');
+ }
  //ends game
  function gameOver()
  {
     if(playerOne === scoreToWin ||  playerTwo === scoreToWin)
     {
+       displayGameOver();
         endGame();
     }
  }
-  function endGame() {
+  
+ function endGame() {
     // stop the interval timer
     clearInterval(interval);
 
     // turn off event handlers
     $(document).off();
-
-    //GameOver Message
-  $('#gameOver').show('#gameMessage');
+  
   }
 }

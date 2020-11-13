@@ -8,22 +8,21 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
 
   // Constant Variables
-  var FRAMES_PER_SECOND_INTERVAL = 1000 / 60;
+  var FRAMES_PER_SECOND_INTERVAL = 100;
   const KEY = {
-  "Left": 37,
-  "Up": 38,
-  "Right": 39,
-  "Down": 40
+    "Left": 37,
+    "Up": 38,
+    "Right": 39,
+    "Down": 40
 };
 
-var frameRate = 100;
   // Game Item Objects
 
   var Bounds = {
-        "Top": 0,
-        "Left": 0,
-        "Bottom": $("#board").height() ,
-        "Right": $("#board").width() ,
+    "Top": 0,
+    "Left": 0,
+    "Bottom": $("#board").height() ,
+    "Right": $("#board").width() ,
     }
   
   function gameItem (id) {
@@ -35,9 +34,10 @@ var frameRate = 100;
     obj.speedY = 0;
     return obj;
 }
+  var snakeArray = [];
+      snakeArray.push(snakeHead);
  
   var snakeHead = gameItem('#snakeHead');
-  var snakeTail = gameItem('#snakeTail');
   
   var apple = gameItem('#apple');
   
@@ -46,7 +46,7 @@ var frameRate = 100;
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-  $(document).on('keyup', handleUpEvent);
+  
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -56,8 +56,12 @@ var frameRate = 100;
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    redrawGameItem();
+    updateGameItem();
+    redrawGameItem(snakeHead);
+    redrawGameItem(apple);
+    updateTail();
     doCollide();
+   
   }
   
   /* 
@@ -65,76 +69,45 @@ var frameRate = 100;
   */
   function handleKeyDown(event) {
   if (event.which === KEY.Left  && !snakeHead.speedX) {
-        frameRate;
-        snakeHead.speedX = -1;
+        snakeHead.speedX = -20;
         snakeHead.speedY = 0;
-        
   }
   else if (event.which === KEY.Up && !snakeHead.speedY) {
-        frameRate;
         snakeHead.speedX = 0;
-        snakeHead.speedY = -1;
-        
+        snakeHead.speedY = -20;
   }  
     
   else if (event.which === KEY.Right && !snakeHead.speedX) {
-       frameRate;
-       snakeHead.speedX = 1;
+       snakeHead.speedX = 20;
        snakeHead.speedY = 0;
-       
   } 
     
   else if (event.which === KEY.Down && !snakeHead.speedY) {
-      frameRate;
       snakeHead.speedX = 0;
-      snakeHead.speedY = 1;
-      
-  }  
+      snakeHead.speedY = 20;
+ }  
 } 
-
-
-//I dont think I will need a handdleUpEvent since the snake have to move smooth
-
-function handleUpEvent(event) {
-  if (event.which === KEY.Left) {
-       snakeHead.speedX = 0;
-       snakeHead.speedY = 0;
-        
-  }
-  else if (event.which === KEY.Up ) {
-       
-       snakeHead.speedX = 0;
-       snakeHead.speedY = 0;
-    
-  }  
-    
-  else if (event.which === KEY.Right ) {
-      
-     snakeHead.speedX = 0;
-     snakeHead.speedY = 0;
-    
-  } 
-    
-  else if (event.which === KEY.Down ) {
-      
-     snakeHead.speedX = 0;
-     snakeHead.speedY = 0;
-    
-  }  
-} 
-
-
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
- function redrawGameItem() {
-        $(snakeHead.id).css("left", snakeHead.x);
-        $(snakeHead.id).css("top", snakeHead.y);
+ function redrawGameItem(obj) {
+        $(obj.id).css("left", obj.x);
+        $(obj.id).css("top", obj.y);
 
-         snakeHead.y += snakeHead.speedY;
-         snakeHead.x += snakeHead.speedX;
+         
+    }
+  function updateGameItem(){
+        snakeHead.y += snakeHead.speedY;
+        snakeHead.x += snakeHead.speedX;
+    }
+
+     function body() {
+        var bodyId = 'body' + (snakeArray.length - 1);
+        var $body = $("<div>").appendTo('#board').attr("id", bodyId);
+        $newBody = gameItem('#body');
+        snakeArray.push($body);
     }
 
 
@@ -156,14 +129,47 @@ function handleUpEvent(event) {
         if (snakeHead.x > Bounds.Left && snakeHead.y > Bounds.Top && snakeHead.x < Bounds.Right && snakeHead.y < Bounds.Bottom) {
             $('#snakeHead').css("background-color", "green");
         }
+   // endGame();
     }
-  
 
+    //recursive function 
+    function eatApple() {
+        
+            // if the snake head is in the same spot as the apple !!aka ate apple!!
+        if (apple.x === snakeHead.x && apple.y === snakeHead.y) {
+        
+            // find a random spot for the apple
+            var randomX = Math.floor(Math.random() * 50);
+            var randomY = Math.floor(Math.random() * 27.5);
+            
+            // loop until it finds a valid position
+            for (var i = 0; i < snakeArray.length; i++) { ///I think should delete it for recursive to work//
+                if (randomX === snakeArray[i].x && randomY === snakeArray[i].y) {
+                    eatApple();
+                    break;
+                    
+                } else{
+                    apple.x = randomX; //reposition the apple
+                    apple.y = randomY;
+                }
+            }
+            // create body 
+            body();
+           
+            // increase the score by the lenght of the snake
+            score = snake.length;
+            document.getElementById('score').innerHTML = "🍎: " + score;
+    }
+}
+    
+   function updateTail() {
+        for (var i = snakeArray.length - 1; i > 0; i--) {
+            snakeArray[i].x = snakeArray[i - 1].x;
+            snakeArray[i].y = snakeArray[i - 1].y;
+        }
+    }
 
-
-
-  
-  function endGame() {
+function endGame() {
     // stop the interval timer
     clearInterval(interval);
 
