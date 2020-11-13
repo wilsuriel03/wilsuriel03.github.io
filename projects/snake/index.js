@@ -155,7 +155,7 @@ function runProgram(){
             }
             // create body 
             body();
-           
+           //
             // increase the score by the lenght of the snake
             score = snake.length;
             document.getElementById('score').innerHTML = "🍎: " + score;
