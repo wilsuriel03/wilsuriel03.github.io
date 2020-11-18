@@ -12,6 +12,12 @@ body {
  justify-content: center;
 }
 
+/*h1, h2, h3{
+font-family: 'Orbitron', sans-serif;
+text-align:center;
+}
+*/
+
 #board {
   width: 1000px;
   height: 550px;
@@ -50,3 +56,28 @@ body {
   left: 50%;   
   top: 50%;   
 }
+
+/*
+#gameOver, #scoreCount {
+    position: absolute;
+    visibility: hidden;
+}
+
+.overMessage{
+    font-size: 62px;
+    margin-bottom; 0px;
+}
+
+#againBtn{
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#againBtn:hover{
+    opacity: 1;
+}
+#score{
+    margin: 0px;
+    
+    }
+*/

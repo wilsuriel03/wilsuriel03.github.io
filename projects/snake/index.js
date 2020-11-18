@@ -36,12 +36,14 @@ function runProgram(){
 }
   var snakeArray = [];
       snakeArray.push(snakeHead);
- 
+  
   var snakeHead = gameItem('#snakeHead');
   
   var apple = gameItem('#apple');
   
   var score = 0;
+
+  
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -129,7 +131,7 @@ function runProgram(){
         if (snakeHead.x > Bounds.Left && snakeHead.y > Bounds.Top && snakeHead.x < Bounds.Right && snakeHead.y < Bounds.Bottom) {
             $('#snakeHead').css("background-color", "green");
         }
-   // endGame();
+   
     }
 
     //recursive function 
@@ -169,7 +171,13 @@ function runProgram(){
         }
     }
 
-function endGame() {
+
+
+
+
+
+
+    function endGame() {
     // stop the interval timer
     clearInterval(interval);
 
