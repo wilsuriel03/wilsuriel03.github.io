@@ -85,6 +85,8 @@ function runProgram(){
     DoCollide(rightPaddleObj, ballObj);
     bounce(ballObj);
     increasePoints(ballObj);
+    //score
+    drawScore();
     //Handle endGame
     gameOver();
   }
@@ -206,9 +208,9 @@ function bounce(ball)
  //reposition paddle and ball pos
  function reposition()
  {
-    leftPaddleObj.x = 10;
+    leftPaddleObj.x = 20;
     leftPaddleObj.y = 251;
-    rightPaddleObj.x = 980;
+    rightPaddleObj.x = 970;
     rightPaddleObj.y = 251;
     ballObj.speedX = -1;
     ballObj.speedY = -1;
@@ -239,6 +241,11 @@ function playAgain (){
     runProgram();
     reposition();
     hideGameOver();
+}
+
+function drawScore(){
+    $('#playerOne').html( playerOne) ;
+   $('#playerTwo').html( playerTwo) ;
 }
  
 function displayGameOver() {

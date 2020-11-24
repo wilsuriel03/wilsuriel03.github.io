@@ -81,22 +81,29 @@ button:hover {
   text-align: center;
 }
 
+#score {
+    padding: 30px 30px;
+    margin: 30px auto;
+}
+
 #playerOne {
 color: white;
+position:absolute;
 opacity: .75;
 font-family: 'Roboto', sans-serif ;
-font-size: 48px;
-top: 251;
+font-size: 80px;
+top: 251px;
 left: 250px;
 }
 
 #playerTwo {
 color: white;
+position:absolute;
 opacity: .75;
 font-family: 'Roboto', sans-serif ;
-font-size: 48px;
-top: 251;
-right: -250px;
+font-size: 80px;
+top: 251px;
+right: 250px;
 }
 
 #ball {
@@ -114,7 +121,7 @@ right: -250px;
   width: 10px;
   height: 85px;
   position: absolute;
-  left: 10px;
+  left: 20px;
   bottom: 251px;
 }
 
@@ -123,7 +130,7 @@ right: -250px;
   width: 10px;
   height: 85px;
   position: absolute;
-  left: 980px;
+  left: 970px;
   bottom: 251px;
 }
 
