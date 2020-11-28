@@ -19,6 +19,8 @@ function runProgram(){
     var snake = gameItem('#snake');
     var food = gameItem('#food'); 
 
+    var snakeDirection = 'down';
+
     snakeInitialize();
     foodInitialize();
     setState('Play');
@@ -58,8 +60,6 @@ function runProgram(){
         obj.y = Number($(id).css('top').replace(/[^-\d\.]/g, ''));
         obj.width =  $(id).width();
         obj.height =  $(id).height();
-        obj.speedX = 0;
-        obj.speedY = 0;
         return obj;
     }
 
@@ -92,7 +92,18 @@ function runProgram(){
         var snakeHeadX = snake[0].x;
         var snakeHeadY = snake[0].y;
 
-        //snakeHeadX++;
+        if (snakeDirection == 'left'){
+            snakeHeadX++;
+        }
+        else if(snakeDirection == 'up'){
+            snakeHeadY++;
+        }
+        else if (snakeDirection == 'right'){
+            snakeHeadX++;
+        }
+        else if (snakeDirection == 'down'){
+            snakeHeadY++;
+        }
         
         checkWallCollision(snakeHeadX, snakeHeadY);
         checkFoodCollision(snakeHeadX, snakeHeadY);
@@ -116,23 +127,19 @@ function runProgram(){
     };
 
     function handleKeyDown(event) {
-    if (event.which === KEY.Left  && !snake.speedX) {
-            snake.speedX = -20;
-            snake.speedY = 0;
+    if (event.which === KEY.Left  && snakeDirection !='right') {
+            snakeDirection = 'left';
     }
-    else if (event.which === KEY.Up && !snake.speedY) {
-            snake.speedX = 0;
-            snake.speedY = -20;
+    else if (event.which === KEY.Up && snakeDirection !='down') {
+            snakeDirection = 'up';
     }  
         
-    else if (event.which === KEY.Right && !snake.speedX) {
-        snake.speedX = 20;
-        snake.speedY = 0;
+    else if (event.which === KEY.Right && snakeDirection !='left') {
+            snakeDirection = 'right';
     } 
         
-    else if (event.which === KEY.Down && !snake.speedY) {
-        snake.speedX = 0;
-        snake.speedY = 20;
+    else if (event.which === KEY.Down && snakeDirection !='up') {
+            snakeDirection = 'down';
     }  
     } 
 
