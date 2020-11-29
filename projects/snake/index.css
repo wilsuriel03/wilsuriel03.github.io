@@ -12,12 +12,18 @@ body {
     justify-content: center;
 }
 
-h1, h2, #againBtn{
-    font-family: 'Orbitron', sans-serif;
+h1,#againBtn{
     text-align:center;
     color: black;
+   
 }
 
+h2{
+ color: black;
+ position:absolute;
+ font-size: 20px;
+ margin: 0;
+}
 
 #board {
     width: 1000px;
@@ -42,7 +48,7 @@ h1, h2, #againBtn{
     top: 0px;
 }
 
-#snake {
+#snakeHead {
     background-color: green;
     width: 20px;
     height: 20px;
@@ -51,15 +57,20 @@ h1, h2, #againBtn{
     top: 50%;   
 }
 
+#snakeBody{
+    background-color: green;
+    width: 20px;
+    height: 20px;  
+}
 
-#gameOver, #scoreCount {
+
+#gameOver{
     position: absolute;
     visibility: hidden;
 }
 
 .gameOverMessage {
     font-size: 62px;
-    margin-bottom: 0px;
     color:black;
 }
 
@@ -82,6 +93,7 @@ h1, h2, #againBtn{
 #againBtn:hover {
     opacity: 1;
 }
+
 #score {
-    margin: 0px;
+    margin: 0;
 }

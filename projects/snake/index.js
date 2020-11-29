@@ -108,7 +108,8 @@ function runProgram(){
      function body() {
         var bodyId = 'body' + (snakeArray.length - 1);
         var $body = $("<div>").appendTo('#board').attr("id", bodyId);
-        $newBody = gameItem('#body');
+        
+        $body = gameItem('#body');
         snakeArray.push($body);
     }
 

@@ -16,10 +16,8 @@ function runProgram(){
 
 
     var board = gameItem('#board');
-    var snake = gameItem('#snake');
+    var snakeHead = gameItem('#snakeHead');
     var food = gameItem('#food'); 
-
-    var snakeDirection = 'down';
 
     snakeInitialize();
     foodInitialize();
@@ -30,7 +28,7 @@ function runProgram(){
     var againBtn; 
 
     var scoreCount = $('#scoreCount');
-   // var score = $('#score');
+    
     /*----------------------------------------------------------------------------------
     *Game Functions
     *-----------------------------------------------------------------------------------
@@ -60,6 +58,8 @@ function runProgram(){
         obj.y = Number($(id).css('top').replace(/[^-\d\.]/g, ''));
         obj.width =  $(id).width();
         obj.height =  $(id).height();
+        obj.speedX = 0;
+        obj.speedY = 0;
         return obj;
     }
 
@@ -69,50 +69,38 @@ function runProgram(){
 */
 
     function snakeInitialize(){
-        snake = [];
-        snakeLength = 1;
-        
-        for(var i = snakeLength - 1; i >= 0; i--){
-        snake.push({
-            x: i,
-            y: 0
-        });
-    }
+        snake = [snakeHead];
+        snakeLength = 0;
     }
 
     function snakeDraw(){
-        for(var i = 0; i < snake.length; i++){
-            $('#snake').css('background-color', 'green');
-            $('#snake').css("left", snake[i].x * snake.width);
-            $('#snake').css("top", snake[i].y * snake.height);
-        }
+       for(var i = 0; i < snake.length; i++){
+        $(snake[i]).css("left",snake[i].x);
+        $(snake[i]).css("top", snake[i].y);
+       }
+        
     }
 
-    function snakeUpdate(){
-        var snakeHeadX = snake[0].x;
-        var snakeHeadY = snake[0].y;
+    function snakeBodyDraw(){
+        var bodyId = 'snakeBody' + (snake.length - 1);
+        var $snakeBody = $("<div>").appendTo('#board').attr("id", bodyId).css("left", snakeA[0].x)
+            .css("top", snake[0].y);
+        
+        $snakebody = gameItem('#snakeBody');
+        snakeArray.push($snakeBody);
+    }
+    
 
-        if (snakeDirection == 'left'){
-            snakeHeadX++;
-        }
-        else if(snakeDirection == 'up'){
-            snakeHeadY++;
-        }
-        else if (snakeDirection == 'right'){
-            snakeHeadX++;
-        }
-        else if (snakeDirection == 'down'){
-            snakeHeadY++;
-        }
+    function snakeUpdate(){
+       
+        checkWallCollision();
+        checkFoodCollision();
+        snakeCollision();
         
-        checkWallCollision(snakeHeadX, snakeHeadY);
-        checkFoodCollision(snakeHeadX, snakeHeadY);
-        snakeCollision(snakeHeadX, snakeHeadY);
-        
-        var snakeTail = snake.pop(); //Remove the last element of an array//
-            snakeTail.x = snakeHeadX;
-            snakeTail.y = snakeHeadY;
-            snake.unshift(snakeTail);
+        for (var i = snake.length - 1; i > 0; i--) {
+            snake[i].x = snake[i - 1].x;
+            snake[i].y = snake[i - 1].y;
+        }
     }
 
 /*----------------------------------------------------------------------------------
@@ -127,20 +115,24 @@ function runProgram(){
     };
 
     function handleKeyDown(event) {
-    if (event.which === KEY.Left  && snakeDirection !='right') {
-            snakeDirection = 'left';
-    }
-    else if (event.which === KEY.Up && snakeDirection !='down') {
-            snakeDirection = 'up';
-    }  
-        
-    else if (event.which === KEY.Right && snakeDirection !='left') {
-            snakeDirection = 'right';
-    } 
-        
-    else if (event.which === KEY.Down && snakeDirection !='up') {
-            snakeDirection = 'down';
-    }  
+        if (event.which === KEY.Left && !snakeHead.speedX) {
+            snakeHead.speedX = -20;
+            snakeHead.speedY = 0;
+        }
+        else if (event.which === KEY.Up && !snakeHead.speedY) {
+            snakeHead.speedX = 0;
+            snakeHead.speedY = -20;
+        }
+
+        else if (event.which === KEY.Right && !snakeHead.speedX) {
+            snakeHead.speedX = 20;
+            snakeHead.speedY = 0;
+        }
+
+        else if (event.which === KEY.Down && !snakeHead.speedY) {
+            snakeHead.speedX = 0;
+            snakeHead.speedY = 20;
+        }  
     } 
 
 
@@ -166,8 +158,8 @@ function runProgram(){
         var randomX = Math.floor(Math.random() * board.width);
         var randomY = Math.floor(Math.random() * board.height);
 
-        food.x = Math.floor(randomX / snake.width);
-        food.y = Math.floor(randomY / snake.height);
+        food.x = Math.floor(randomX / snakeHead.width);
+        food.y = Math.floor(randomY / snakeHead.height);
     }
 
 /*----------------------------------------------------------------------------------
@@ -175,49 +167,50 @@ function runProgram(){
 *-----------------------------------------------------------------------------------
 */
 
-    function checkFoodCollision(snakeHeadX, snakeHeadY){
-        if(snakeHeadX == food.x && snakeHeadY == food.y) {
+    function checkFoodCollision(){
+        if(snakeHead == food.x && snakeHead == food.y) {
             snakeInitialize();
             setFoodPosition();
+            snakeBodyDraw();
             snakeLength++;
         }
     }
 
-    function checkWallCollision(snakeHeadX, snakeHeadY){
+    function checkWallCollision(){
         var Bounds = {
         "Top": 0,
         "Left": 0,
         "Bottom": $("#board").height() ,
         "Right": $("#board").width() ,
         }
-        if (snakeHeadX < Bounds.Left ){
+        if (snakeHead < Bounds.Left ){
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         }
-        if (snakeHeadY < Bounds.Top) {
+        if (snakeHead < Bounds.Top) {
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         } 
-        if (snakeHeadX > Bounds.Right) {
+        if (snakeHead > Bounds.Right) {
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         } 
-        if (snakeHeadY > Bounds.Bottom) {
+        if (snakeHead > Bounds.Bottom) {
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         }
-        if (snakeHeadX > Bounds.Left && snakeHeadY > Bounds.Top && snakeHeadX < Bounds.Right && snakeHeadY < Bounds.Bottom) {
+        if (snakeHead > Bounds.Left && snakeHead > Bounds.Top && snakeHead < Bounds.Right && snakeHead < Bounds.Bottom) {
             $('#snakeHead').css("background-color", "green");
             console.log('in');
         }
     }
-    function snakeCollision(snakeHeadX, snakeHeadY){
+    function snakeCollision(){
         for(var i = 1; i < snake.length ; i++){
-            if(snakeHeadX == snake[i].x && snakeHeadY == snake[i].y){
+            if(snakeHead == snake[i].x && snakeHead == snake[i].y){
                 setState('Game Over');
                 break;
             }
