@@ -83,7 +83,7 @@ function runProgram(){
 
     function snakeBodyDraw(){
         var bodyId = 'snakeBody' + (snake.length - 1);
-        var $snakeBody = $("<div>").appendTo('#board').attr("id", bodyId).css("left", snakeA[0].x)
+        var $snakeBody = $("<div>").appendTo('#board').attr("id", bodyId).css("left", snake[0].x)
             .css("top", snake[0].y);
         
         $snakebody = gameItem('#snakeBody');
