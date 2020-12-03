@@ -22,6 +22,7 @@ function runProgram(){
     snakeInitialize();
     foodInitialize();
     setState('Play');
+    
 
     var gameState;
     var gameOverMenu = $('#gameOver');

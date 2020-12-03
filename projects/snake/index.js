@@ -34,10 +34,12 @@ function runProgram(){
     obj.speedY = 0;
     return obj;
 }
-  var snakeArray = [];
+
+    var snakeHead = gameItem('#snakeHead');
+    var snakeArray = [];
       snakeArray.push(snakeHead);
   
-  var snakeHead = gameItem('#snakeHead');
+  
   
   var apple = gameItem('#apple');
   
