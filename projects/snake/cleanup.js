@@ -11,7 +11,7 @@ function runProgram(){
  * ---------------------------------------------------------------------------------
  */
 
-    var interval = setInterval(gameLoop, 1000/30);
+    var interval = setInterval(gameLoop, 1000/20);
     $(document).on('keydown', handleKeyDown); 
 
 
@@ -25,10 +25,13 @@ function runProgram(){
     
 
     var gameState;
-    var gameOverMenu = $('#gameOver');
-    var againBtn; 
+    var gameOverMenu = document.getElementById('gameOver');
+    var againBtn = document.getElementById('againBtn');
+        againBtn.addEventListener('click', playAgain);; 
 
-    var scoreCount = $('#scoreCount');
+    var scoreCount = document.getElementById('scoreCount');
+
+   
     
     /*----------------------------------------------------------------------------------
     *Game Functions
@@ -75,10 +78,12 @@ function runProgram(){
     }
 
     function snakeDraw(){
-       for(var i = 0; i < snake.length; i++){
-        $(snake[i]).css("left",snake[i].x);
-        $(snake[i]).css("top", snake[i].y);
+       for(var i = 1; i < snake.length; i++){
+        $(snake[i].bodyId).css("left",snake[i].x);
+        $(snake[i].bodyId).css("top", snake[i].y);
        }
+        $("#snakeHead").css("left",snake[0].x);
+        $("#snakeHead").css("top", snake[0].y);
         
     }
 
@@ -102,6 +107,8 @@ function runProgram(){
             snake[i].x = snake[i - 1].x;
             snake[i].y = snake[i - 1].y;
         }
+        snake[i].x += snakeHead.speedX;
+        snake[i].y += snakeHead.speedY;
     }
 
 /*----------------------------------------------------------------------------------
@@ -169,7 +176,7 @@ function runProgram(){
 */
 
     function checkFoodCollision(){
-        if(snakeHead == food.x && snakeHead == food.y) {
+        if(snakeHead.x == food.x && snakeHead.y == food.y) {
             snakeInitialize();
             setFoodPosition();
             snakeBodyDraw();
@@ -184,34 +191,34 @@ function runProgram(){
         "Bottom": $("#board").height() ,
         "Right": $("#board").width() ,
         }
-        if (snakeHead < Bounds.Left ){
+        if (snakeHead.x < Bounds.Left ){
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         }
-        if (snakeHead < Bounds.Top) {
+        if (snakeHead.y < Bounds.Top) {
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         } 
-        if (snakeHead > Bounds.Right) {
+        if (snakeHead.x > Bounds.Right) {
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         } 
-        if (snakeHead > Bounds.Bottom) {
+        if (snakeHead.y > Bounds.Bottom) {
             $('#snakeHead').css("background-color", "red");
             setState('Game Over');
             console.log('out');
         }
-        if (snakeHead > Bounds.Left && snakeHead > Bounds.Top && snakeHead < Bounds.Right && snakeHead < Bounds.Bottom) {
+        if (snakeHead.x > Bounds.Left && snakeHead.y > Bounds.Top && snakeHead.x < Bounds.Right && snakeHead.y < Bounds.Bottom) {
             $('#snakeHead').css("background-color", "green");
             console.log('in');
         }
     }
     function snakeCollision(){
         for(var i = 1; i < snake.length ; i++){
-            if(snakeHead == snake[i].x && snakeHead == snake[i].y){
+            if(snakeHead.x == snake[i].x && snakeHead.y == snake[i].y){
                 setState('Game Over');
                 break;
             }
@@ -231,18 +238,12 @@ function runProgram(){
         $("#gameOver").css('visibility', 'visible');
     }
 
-    function button(){
-        againBtn = $('#againBtn');
-        againBtn.addEventListener('click', playAgain);
-    }
-
     function hideMenu(){
         $("#gameOver").css('visibility', 'hidden');
-        button();
     }
 
     function showMenu(state){
-        if(state == 'Game OVer'){
+        if(state == 'Game Over'){
             displayMenu(gameOver);    
         }
         else if(state == 'Play'){

@@ -15,7 +15,6 @@ body {
 h1,#againBtn{
     text-align: center;
     color: black;
-   
 }
 
 h2{
@@ -27,7 +26,7 @@ h2{
 
 #board {
     width: 1000px;
-    height: 550px;
+    height: 520px;
     border: 1px solid black;    
     background-color: white; 
     position: relative;
@@ -65,8 +64,9 @@ h2{
 
 
 #gameOver{
-    position: absolute;
+    position: relative;
     visibility: hidden;
+    
 }
 
 .gameOverMessage {
