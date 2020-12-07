@@ -22,7 +22,7 @@ function runProgram(){
     snakeInitialize();
     foodInitialize();
     setState('Play');
-    
+    hideMenu();
 
     var gameState;
     var gameOverMenu = document.getElementById('gameOver');
@@ -98,18 +98,18 @@ function runProgram(){
     
 
     function snakeUpdate(){
-       
-        checkWallCollision();
-        checkFoodCollision();
-        snakeCollision();
-        
-        for (var i = snake.length - 1; i > 0; i--) {
+       for (var i = snake.length - 1; i > 0; i--) {
             snake[i].x = snake[i - 1].x;
             snake[i].y = snake[i - 1].y;
         }
         snake[i].x += snakeHead.speedX;
         snake[i].y += snakeHead.speedY;
+        
+        checkWallCollision();
+        checkFoodCollision();
+        snakeCollision();
     }
+        
 
 /*----------------------------------------------------------------------------------
 *Key functions
