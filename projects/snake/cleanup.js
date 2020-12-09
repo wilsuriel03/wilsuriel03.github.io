@@ -18,7 +18,8 @@ function runProgram(){
     var board = gameItem('#board');
     var snakeHead = gameItem('#snakeHead');
     var food = gameItem('#food'); 
-
+    var foodEaten = 0;
+    
     snakeInitialize();
     foodInitialize();
     setState('Play');
@@ -26,8 +27,7 @@ function runProgram(){
 
     var gameState;
     var gameOverMenu = document.getElementById('gameOver');
-    var againBtn = document.getElementById('againBtn');
-        againBtn.addEventListener('click', playAgain);; 
+    $('#againBtn').on('click',playAgain);
 
     var scoreCount = document.getElementById('scoreCount');
 
@@ -43,7 +43,7 @@ function runProgram(){
         if(gameState == 'Play'){
             snakeUpdate();
             snakeDraw();
-            foodDraw();
+           snakeInitialize();
         }
     }
 
@@ -74,7 +74,6 @@ function runProgram(){
 
     function snakeInitialize(){
         snake = [snakeHead];
-        snakeLength = 0;
     }
 
     function snakeDraw(){
@@ -89,11 +88,14 @@ function runProgram(){
 
     function snakeBodyDraw(){
         var bodyId = 'snakeBody' + (snake.length - 1);
-        var $snakeBody = $("<div>").appendTo('#board').attr("id", bodyId).css("left", snake[0].x)
-            .css("top", snake[0].y);
+        var $div = $('<div>').appendTo('#board')
+                            .addClass('snakeBody')
+                            .attr('id', bodyId)
+                            .css('left', snake[0].x)
+                            .css('top', snake[0].y);
         
-        $snakebody = gameItem('#snakeBody');
-        snakeArray.push($snakeBody);
+        var snakeBody =  gameItem('#' + bodyId);;
+        snake.push(snakeBody);
     }
     
 
@@ -154,20 +156,22 @@ function runProgram(){
         $('#food').css("top", food.y);
         
         setFoodPosition();
+        foodDraw();
     }
 
     function foodDraw(){
         //$('#food').css('background-color', 'red');
-        $('#food').css("left", food.x , food.width);
-        $('#food').css("top", food.y , food.height);
+        $('#food').css("left", food.x );
+        $('#food').css("top", food.y );
     }
 
     function setFoodPosition () {
-        var randomX = Math.floor(Math.random() * board.width);
-        var randomY = Math.floor(Math.random() * board.height);
+        var randomX = Math.floor(Math.random() * board.width/20)*20;
+        var randomY = Math.floor(Math.random() * board.height/20)*20;
 
-        food.x = Math.floor(randomX / snakeHead.width);
-        food.y = Math.floor(randomY / snakeHead.height);
+        food.x = Math.floor(randomX);
+        food.y = Math.floor(randomY);
+        foodDraw();
     }
 
 /*----------------------------------------------------------------------------------
@@ -180,7 +184,7 @@ function runProgram(){
             snakeInitialize();
             setFoodPosition();
             snakeBodyDraw();
-            snakeLength++;
+            foodEaten++;
         }
     }
 
@@ -252,7 +256,7 @@ function runProgram(){
     }
 
     function drawScore(){
-        $('#score').html( '🍎: ' + snakeLength); 
+        $('#score').html( '🍎: ' + foodEaten); 
     }
 
     function endGame() {

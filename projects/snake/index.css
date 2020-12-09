@@ -45,6 +45,7 @@ h2{
     height: 20px;
     left: 0px;
     top: 0px;
+    position: absolute;
 }
 
 #snakeHead {
@@ -56,16 +57,20 @@ h2{
     top: 220px;   
 }
 
-#snakeBody{
+.snakeBody{
     background-color: green;
     width: 20px;
-    height: 20px;  
+    height: 20px;
+    
+      
 }
 
 
 #gameOver{
-    position: relative;
+    position: absolute;
     visibility: hidden;
+    left: 260px;
+    top: 120px;
     
 }
 
