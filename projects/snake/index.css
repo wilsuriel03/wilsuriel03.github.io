@@ -46,6 +46,9 @@ h2{
     left: 0px;
     top: 0px;
     position: absolute;
+   /* border-radius: 15px;
+    transform:translatey(0px);
+    animation: float 6s ease-in-out infinite;*/
 }
 
 #snakeHead {
@@ -61,8 +64,7 @@ h2{
     background-color: green;
     width: 20px;
     height: 20px;
-    
-      
+    position:absolute;
 }
 
 
@@ -102,3 +104,17 @@ h2{
 #score {
     margin: 0;
 }
+
+/*@keyframes float{
+  0%{
+    transform:translatey(0px);
+  }
+  50%{
+    transform:translatey(-10px);
+  }
+  100%{
+    transform:translatey(0px);
+  }
+  
+  }*/
+
