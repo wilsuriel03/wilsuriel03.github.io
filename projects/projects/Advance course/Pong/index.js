@@ -38,8 +38,8 @@ function runProgram(){
   var playerOne = 0;
   var playerTwo = 0;
   var scoreToWin = 11;
-  var gameOverMenu;
-  var again;
+  var $gameOverMenu;
+  var $again;
 
   
   // Game Item Objects
@@ -158,22 +158,22 @@ function handleKeyUp(event) {
  }
   
  //detects for collisions
- function DoCollide(paddle1, paddle2)
+ function DoCollide(object1, object2)
  {
     //paddle1
-    paddle1.right = paddle1.x + paddle1.width;
-    paddle1.botom = paddle1.y + paddle1.height;
-    paddle1.left = paddle1.x;
-    paddle1.top = paddle1.y;
+    object1.right = object1.x + object1.width;
+    object1.botom = object1.y + object1.height;
+    object1.left = object1.x;
+    object1.top = object1.y;
     
     //paddle2
-    paddle2.right = paddle2.x + paddle2.width;
-    paddle2.botom = paddle2.y + paddle2.height;
-    paddle2.left = paddle2.x;
-    paddle2.top = paddle2.y;
+    object2.right = object2.x + object2.width;
+    object2.botom = object2.y + object2.height;
+    object2.left = object2.x;
+    object2.top = object2.y;
 
     
-    if(paddle1.right > paddle2.left && paddle1.left < paddle2.right && paddle1.top < paddle2.botom && paddle1.botom > paddle2.top)
+     if (object1.right > object2.left && object1.left < object2.right && object1.top <object2.botom && object1.botom > object2.top)
     {
         console.log("HIT");
         ballObj.speedY = ballObj.speedY * speedUp;
@@ -233,8 +233,8 @@ function bounce(ball)
     }
  }
 function againBtn (){
-again = document.getElementById('againBtn');
-again.addEventListener('click', playAgain);
+$again = $('#againBtn');
+$('#againBtn').on('click', playAgain);
 }
 
 function playAgain (){
@@ -249,7 +249,7 @@ function drawScore(){
 }
  
 function displayGameOver() {
-     gameOverMenu = document.getElementById('gameOver');
+     $gameOverMenu = $('#gameOver');
      $("#gameOver").css('visibility', 'visible');
      againBtn();
  }
