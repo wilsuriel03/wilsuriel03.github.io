@@ -197,12 +197,13 @@ function runProgram() {
         var Bounds = {
             "Top": 0,
             "Left": 0,
-            "Bottom": $("#board").height(),
-            "Right": $("#board").width(),
+            "Bottom": $("#board").height() -20,
+            "Right": $("#board").width() -20,
         }
         if (snakeHead.x < Bounds.Left) {
             $('#snakeHead').css("background-color", "red");
             displayMenu();
+            
             console.log('out');
         }
         if (snakeHead.y < Bounds.Top) {
@@ -229,6 +230,7 @@ function runProgram() {
         for (var i = 1; i < snake.length; i++) {
             if (snakeHead.x == snake[i].x && snakeHead.y == snake[i].y) {
                 displayMenu();
+                $('#snakeHead').css("background-color", "red");
                 break;
             }
         }
@@ -240,7 +242,7 @@ function runProgram() {
     */
     function displayMenu() {
         $("#gameOver").css('visibility', 'visible');
-        endGame();
+         endGame();
     }
 
     function hideMenu() {
