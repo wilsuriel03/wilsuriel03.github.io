@@ -297,7 +297,7 @@ header {
 /*  My hobbies section  */
 
 .my-hobbies {
-     background-color: var(--clr-dark);
+    background-color: var(--clr-dark);
     background-image: url(../img/hobbies.png);
     background-size: cover;
     /* background-blend-mode: multiply; */

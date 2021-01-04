@@ -45,6 +45,9 @@ function runProgram() {
     }
 
     function playAgain() {
+        foodEaten = 0;
+        snakeHead.speedX = 0;
+        snakeHead.speedY = 0;
         
         for (var i = 1; i < snake.length; i++){
             $(snake[i].id).remove();
@@ -56,7 +59,7 @@ function runProgram() {
         snakeInitialize();
         foodInitialize();
         hideMenu($gameOverMenu);
-        
+        interval = setInterval(gameLoop, 1000 / 10);
     }
 
 
@@ -132,20 +135,25 @@ function runProgram() {
 
     function handleKeyDown(event) {
         if (event.which === KEY.Left && !snakeHead.speedX) {
+            $('#snakeHead').css('transform','rotate(360deg)');
+           
             snakeHead.speedX = -20;
             snakeHead.speedY = 0;
         }
         else if (event.which === KEY.Up && !snakeHead.speedY) {
+            $('#snakeHead').css('transform','rotate(90deg)');
             snakeHead.speedX = 0;
             snakeHead.speedY = -20;
         }
 
         else if (event.which === KEY.Right && !snakeHead.speedX) {
+           $('#snakeHead').css('transform','rotate(-180deg)');
             snakeHead.speedX = 20;
             snakeHead.speedY = 0;
         }
 
         else if (event.which === KEY.Down && !snakeHead.speedY) {
+            $('#snakeHead').css('transform','rotate(-90deg)');
             snakeHead.speedX = 0;
             snakeHead.speedY = 20;
         }
@@ -201,36 +209,31 @@ function runProgram() {
             "Right": $("#board").width() -20,
         }
         if (snakeHead.x < Bounds.Left) {
-            $('#snakeHead').css("background-color", "red");
+           // $('#snakeHead').css("background-color", "red");
             displayMenu();
-            
-            console.log('out');
         }
         if (snakeHead.y < Bounds.Top) {
-            $('#snakeHead').css("background-color", "red");
+            //$('#snakeHead').css("background-color", "red");
             displayMenu();
-            console.log('out');
         }
         if (snakeHead.x > Bounds.Right) {
-            $('#snakeHead').css("background-color", "red");
+           // $('#snakeHead').css("background-color", "red");
             displayMenu();
-            console.log('out');
         }
         if (snakeHead.y > Bounds.Bottom) {
-            $('#snakeHead').css("background-color", "red");
+            //$('#snakeHead').css("background-color", "red");
             displayMenu();
-            console.log('out');
         }
         if (snakeHead.x > Bounds.Left && snakeHead.y > Bounds.Top && snakeHead.x < Bounds.Right && snakeHead.y < Bounds.Bottom) {
-            $('#snakeHead').css("background-color", "green");
-            console.log('in');
+           // $('#snakeHead').css("background-color", "green");
+            
         }
     }
     function snakeCollision() {
         for (var i = 1; i < snake.length; i++) {
             if (snakeHead.x == snake[i].x && snakeHead.y == snake[i].y) {
+                //$('#snakeHead').css("background-color", "red");
                 displayMenu();
-                $('#snakeHead').css("background-color", "red");
                 break;
             }
         }
@@ -258,7 +261,7 @@ function runProgram() {
         clearInterval(interval);
 
         // turn off event handlers
-        $(document).off();
+       // $(document).off();
     }
 }
 
