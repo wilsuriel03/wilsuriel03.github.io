@@ -126,6 +126,19 @@ _.filter = function(arr, func){
       return final;
     };
 
+    /*_.filter = function(arr, func) {
+  var results = [];
+
+  _.each(arr, function(val, i, arr) {
+    if (func(val, i, arr)) {
+      results.push(val);
+    }
+  });
+  
+  return results;
+};
+*/
+
 
 /** _.reject
 * Arguments:
@@ -152,12 +165,12 @@ _.reject = function(arr, func){
 /*_.reject = function(arr, func) {
   var results = [];
 
-  _.each(arr, function(val, i, arr) {
+  _.each(arr, (val, i, arr) => {
     if (!func(val, i, arr)) {
       results.push(val);
     }
   });
-  hello
+  
   return results;
 };
 */
@@ -183,7 +196,15 @@ _.map = function(arr, func){
     return final;
   }   
 
-
+  /*_.map = function(arr, func){
+    var final = [];
+   
+    _.each(arr, ( val, i, arr)=> {
+        final.push(func(val, i, arr));
+    });
+    return final;
+  }   
+*/
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
