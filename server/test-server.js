@@ -1,6 +1,6 @@
 var http = require("http");
-var fs = require('fs')
-var port = 8686;
+var fs = require('fs');
+var port = process.argv[2];
 
 var server = http.createServer(function (req, res) {
   // handle response
@@ -8,7 +8,7 @@ var server = http.createServer(function (req, res) {
   fs.readFile('index.html', function (error, data) {
     if (error) {
       res.writeHead(404)
-      res.write('Eroor: File Not Found')
+      res.write('Error: File Not Found')
     } else {
       res.write(data)
     }
